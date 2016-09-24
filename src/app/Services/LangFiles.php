@@ -76,7 +76,7 @@ class LangFiles
             if (! in_array($fileName, array_merge(['.', '..'], config('backpack.langfilemanager.language_ignore')))) {
                 $fileList[] = [
                     'name' => ucfirst(str_replace('_', ' ', $fileName)),
-                    'url' => url("admin/language/texts/{$this->lang}/{$fileName}"),
+                    'url' => url(config('backpack.base.route_prefix', 'admin')."/language/texts/{$this->lang}/{$fileName}"),
                     'active' => $fileName == $this->file,
                 ];
             }

@@ -10,7 +10,7 @@
 
 A quick interface to edit language files, for Laravel Backpack.
 
-**Subscribe to the [Mailchimp list](http://eepurl.com/bUEGjf) to be up to date with the community.** 
+**Subscribe to the [Mailchimp list](http://eepurl.com/bUEGjf) to be up to date with the community.**
 
 ![Edit view for Backpack/LangFileManager](https://dl.dropboxusercontent.com/u/2431352/backpack_langfilemanager.png)
 
@@ -22,7 +22,7 @@ A quick interface to edit language files, for Laravel Backpack.
 $ composer require backpack/langfilemanager
 ```
 
-### Step 2. Add the service provider 
+### Step 2. Add the service provider
 
 In your config/app.php, add this to the providers array:
 
@@ -56,25 +56,25 @@ Add a menu item for it in resources/views/vendor/backpack/base/inc/sidebar.blade
 
 ```html
 <li class="treeview">
-            <a href="#"><i class="fa fa-globe"></i> <span>Translations</span> <i class="fa fa-angle-left pull-right"></i></a>
-            <ul class="treeview-menu">
-              <li><a href="{{ url('admin/language') }}"><i class="fa fa-flag-checkered"></i> Languages</a></li>
-              <li><a href="{{ url('admin/language/texts') }}"><i class="fa fa-language"></i> Site texts</a></li>
-            </ul>
-          </li>
+  <a href="#"><i class="fa fa-globe"></i> <span>Translations</span> <i class="fa fa-angle-left pull-right"></i></a>
+  <ul class="treeview-menu">
+    <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/language') }}"><i class="fa fa-flag-checkered"></i> Languages</a></li>
+    <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/language/texts') }}"><i class="fa fa-language"></i> Site texts</a></li>
+  </ul>
+</li>
 ```
 
 or in menu.blade.php:
 ```html
 <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-            <i class="fa fa-globe"></i> Translations<span class="caret"></span>
-          </a>
-          <ul class="dropdown-menu" role="menu">
-            <li class=""><a href="{{ url('admin/language') }}"><i class="fa fa-flag-checkered"></i> Languages</a></li>
-            <li class=""><a href="{{ url('admin/language/texts') }}"><i class="fa fa-language"></i> Site texts</a></li>
-          </ul>
-        </li>
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+    <i class="fa fa-globe"></i> Translations<span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class=""><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/language') }}"><i class="fa fa-flag-checkered"></i> Languages</a></li>
+    <li class=""><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/language/texts') }}"><i class="fa fa-language"></i> Site texts</a></li>
+  </ul>
+</li>
 ```
 
 Or just try at **your-project-domain/admin/language/texts**

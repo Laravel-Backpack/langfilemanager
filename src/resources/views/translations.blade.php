@@ -6,7 +6,7 @@
 	    {{ trans('backpack::langfilemanager.translate') }} <span class="text-lowercase">{{ trans('backpack::langfilemanager.site_texts') }}</span>
 	  </h1>
 	  <ol class="breadcrumb">
-	    <li><a href="{{ url('admin/dashboard') }}">{{ trans('backpack::crud.admin') }}</a></li>
+	    <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/dashboard') }}">{{ trans('backpack::crud.admin') }}</a></li>
 	    <li><a href="{{ url($crud->route) }}" class="text-capitalize">{{ $crud->entity_name_plural }}</a></li>
 	    <li class="active">{{ trans('backpack::crud.edit') }} {{ trans('backpack::langfilemanager.texts') }}</li>
 	  </ol>
@@ -27,7 +27,7 @@
 			 &nbsp; {{ trans('backpack::langfilemanager.switch_to') }}: &nbsp;
 			<select name="language_switch" id="language_switch">
 				@foreach ($languages as $lang)
-				<option value="{{ url("admin/language/texts/{$lang->abbr}") }}" {{ $currentLang == $lang->abbr ? 'selected' : ''}}>{{ $lang->name }}</option>
+				<option value="{{ url(config('backpack.base.route_prefix', 'admin')."/language/texts/{$lang->abbr}") }}" {{ $currentLang == $lang->abbr ? 'selected' : ''}}>{{ $lang->name }}</option>
 				@endforeach
 			</select>
 		</small>
@@ -47,7 +47,7 @@
 		<br>
 		<section class="lang-inputs">
 		@if (!empty($fileArray))
-			{!! Form::open(array('url' => url("admin/language/texts/{$currentLang}/{$currentFile}"), 'method' => 'post', 'id' => 'lang-form', 'class' => 'form-horizontal', 'data-required' => trans('admin.language.fields_required'))) !!}
+			{!! Form::open(array('url' => url(config('backpack.base.route_prefix', 'admin')."/language/texts/{$currentLang}/{$currentFile}"), 'method' => 'post', 'id' => 'lang-form', 'class' => 'form-horizontal', 'data-required' => trans('admin.language.fields_required'))) !!}
 				{!! Form::button(trans('backpack::crud.save'), array('type' => 'submit', 'class' => 'btn btn-success submit pull-right hidden-xs hidden-sm', 'style' => "margin-top: -60px;")) !!}
 				<div class="form-group hidden-sm hidden-xs">
 					<div class="col-sm-2 text-right">
