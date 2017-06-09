@@ -62,7 +62,9 @@ class LangFileManagerServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerLangFileManager();
-        $this->setupRoutes($this->app->router);
+        if(!config('backpack.base.skip_all_backpack_routes',false)){
+            $this->setupRoutes($this->app->router);            
+        }
 
         $this->app->singleton('langfile', function ($app) {
             return new LangFiles($app['config']['app']['locale']);
