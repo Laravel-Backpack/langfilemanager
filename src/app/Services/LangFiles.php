@@ -70,7 +70,7 @@ class LangFiles
     {
         $fileList = [];
 
-        foreach (scandir($this->getLangPath(), SCANDIR_SORT_DESCENDING) as $file) {
+        foreach (is_dir($this->getLangPath()) ? scandir($this->getLangPath(), SCANDIR_SORT_DESCENDING) : [] as $file) {
             $fileName = str_replace('.php', '', $file);
 
             if (! in_array($fileName, array_merge(['.', '..'], config('backpack.langfilemanager.language_ignore')))) {
