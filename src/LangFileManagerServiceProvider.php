@@ -50,7 +50,11 @@ class LangFileManagerServiceProvider extends ServiceProvider
     public function setupRoutes(Router $router)
     {
         $router->group(['namespace' => 'Backpack\LangFileManager\app\Http\Controllers'], function ($router) {
-            require __DIR__.'/app/Http/routes.php';
+             if (file_exists(base_path('routes/backpack/langfilemanager.php'))) {
+                require base_path('routes/backpack/langfilemanager.php');
+            } else {
+                require __DIR__.'/app/Http/routes.php';
+            }
         });
     }
 
