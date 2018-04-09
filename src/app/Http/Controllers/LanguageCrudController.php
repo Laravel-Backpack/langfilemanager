@@ -147,15 +147,12 @@ class LanguageCrudController extends CrudController
 
         $langfile->setFile($file);
 
-        $fields = $langfile->testFields($request->all());
-        if (empty($fields)) {
-            if ($langfile->setFileContent($request->all())) {
-                \Alert::success(trans('backpack::langfilemanager.saved'))->flash();
-                $status = true;
-            }
+        if ($langfile->setFileContent($request->all())) {
+            \Alert::success(trans('backpack::langfilemanager.saved'))->flash();
+            $status = true;
         } else {
             $message = trans('admin.language.fields_required');
-            \Alert::error(trans('backpack::langfilemanager.please_fill_all_fields'))->flash();
+            \Alert::error(trans('backpack::langfilemanager.file_could_not_be_saved'))->flash();
         }
 
         return redirect()->back();
