@@ -92,34 +92,6 @@ class LangFiles
     }
 
     /**
-     * check if all the fields were completed.
-     * @param 	array		$postArray		the array containing the data
-     * @return	array
-     */
-    public function testFields($postArray)
-    {
-        $returnArray = [];
-
-        foreach ($postArray as $key => $value) {
-            if (is_array($value)) {
-                foreach ($value as $k => $item) {
-                    foreach ($item as $j => $it) {
-                        if (trim($it) == '') {
-                            $returnArray[] = ['parent' => $key, 'child' => $j];
-                        }
-                    }
-                }
-            } else {
-                if (trim($value) == '') {
-                    $returnArray[] = $key;
-                }
-            }
-        }
-
-        return $returnArray;
-    }
-
-    /**
      * display the form that permits the editing.
      * @param 	array  		$fileArray		the array with all the texts
      * @param 	array  		$parents  		all the ancestor keys of the current key
@@ -206,12 +178,12 @@ class LangFiles
 
     private function getFilePath()
     {
-        return base_path("resources/lang/{$this->lang}/{$this->file}.php");
+        return resource_path("lang/{$this->lang}/{$this->file}.php");
     }
 
     private function getLangPath()
     {
-        return base_path("resources/lang/{$this->lang}/");
+        return resource_path("lang/{$this->lang}/");
     }
 
     private function var_export54($var, $indent = '')

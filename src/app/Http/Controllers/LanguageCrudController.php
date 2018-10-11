@@ -2,12 +2,10 @@
 
 namespace Backpack\LangFileManager\app\Http\Controllers;
 
-use App\Http\Requests;
-use Illuminate\Http\Request;
 use Backpack\LangFileManager\app\Models\Language;
 use Backpack\LangFileManager\app\Services\LangFiles;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
-// VALIDATION: change the requests to match your own file names if you need form validation
+use Backpack\LangFileManager\app\Http\Requests\LanguageTextRequest;
 use Backpack\LangFileManager\app\Http\Requests\LanguageRequest as StoreRequest;
 use Backpack\LangFileManager\app\Http\Requests\LanguageRequest as UpdateRequest;
 
@@ -130,7 +128,7 @@ class LanguageCrudController extends CrudController
         return view('langfilemanager::translations', $this->data);
     }
 
-    public function updateTexts(LangFiles $langfile, Request $request, $lang = '', $file = 'site')
+    public function updateTexts(LangFiles $langfile, LanguageTextRequest $request, $lang = '', $file = 'site')
     {
         // SECURITY
         // check if that file isn't forbidden in the config file
@@ -138,24 +136,14 @@ class LanguageCrudController extends CrudController
             abort('403', trans('backpack::langfilemanager.cant_edit_online'));
         }
 
-        $message = trans('error.error_general');
-        $status = false;
-
         if ($lang) {
             $langfile->setLanguage($lang);
         }
 
         $langfile->setFile($file);
 
-        $fields = $langfile->testFields($request->all());
-        if (empty($fields)) {
-            if ($langfile->setFileContent($request->all())) {
-                \Alert::success(trans('backpack::langfilemanager.saved'))->flash();
-                $status = true;
-            }
-        } else {
-            $message = trans('admin.language.fields_required');
-            \Alert::error(trans('backpack::langfilemanager.please_fill_all_fields'))->flash();
+        if ($langfile->setFileContent($request->all())) {
+            \Alert::success(trans('backpack::langfilemanager.saved'))->flash();
         }
 
         return redirect()->back();

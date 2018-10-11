@@ -34,7 +34,7 @@
     ],
     "require": {
         "illuminate/support": "~5.1",
-        "php" : ">=5.3.0",
+        "php" : ">=5.4.0",
         "backpack/crud": "^3.0.6"
     },
     "require-dev": {
