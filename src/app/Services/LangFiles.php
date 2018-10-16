@@ -176,7 +176,6 @@ class LangFiles
         }
 
         ksort($returnArray);
-        
         return $returnArray;
     }
 
