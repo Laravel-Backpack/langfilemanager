@@ -137,9 +137,11 @@ class LangFiles
         $has_lower_level = false;
         $first_key = array_key_first($fileArray);
         foreach ($fileArray as $key => $item) {
-            if (is_array($item))  $has_lower_level = true;
+            if (is_array($item))  {
+                $has_lower_level = true;
+            }
         }
-        if ($has_lower_level){
+        if ($has_lower_level) {
             echo view()->make('langfilemanager::language_tabs', [
                 'first_key'=>$first_key,
                 'header' => $key,
@@ -147,16 +149,16 @@ class LangFiles
                 'level' => $level,
                 'langfile' => $this,
                 'lang_file_name' => $this->file,
-                'fileArray'=>$fileArray
+                'fileArray'=>$fileArray,
             ])->render();
         }else{
             foreach ($fileArray as $key => $item) {
-                    echo view()->make('langfilemanager::language_inputs', [
-                        'key' => $key,
-                        'item' => $item,
-                        'parents' => $parents,
-                        'lang_file_name' => $this->file,
-                    ])->render();
+                echo view()->make('langfilemanager::language_inputs', [
+                    'key' => $key,
+                    'item' => $item,
+                    'parents' => $parents,
+                    'lang_file_name' => $this->file,
+                ])->render();
             }
         }
     }
