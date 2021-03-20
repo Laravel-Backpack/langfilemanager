@@ -20,21 +20,34 @@
 			@endphp
 
 			<div style="margin-left: 15px;">
+				<ul class="nav nav-tabs" >
+					@foreach ($chuncks as $k => $chunck)
+						<li class="nav-item">
+							<a class="nav-link" data-toggle="tab" data-target="#{{$key.'-'.$k}}">{{ (!$k ? trans('admin.language.singular') : trans('admin.language.plural')).":" }}</a>
+						</li>
+					@endforeach
+				</ul>
+				<div class="tab-content">
 			@foreach ($chuncks as $k => $chunck)
 				@php
 				preg_match('/^({\w}|\[[\w,]+\])([\w\s:]+)/', trim($chunck), $m);
 				@endphp
 				@if (empty($m))
-					<label for="{{ $chunck }}" class="col-sm-2 control-label">{{ (!$k ? trans('admin.language.singular') : trans('admin.language.plural')).":" }}</label>
+					<div class="tab-pane "  id="{{$key.'-'.$k}}">
+					 {{-- <label for="{{ $chunck }}" class="col-sm-2 control-label">{{ (!$k ? trans('admin.language.singular') : trans('admin.language.plural')).":" }}</label>--}}
 					<textarea name="{{ (empty($parents) ? $key : implode('__', $parents)."__{$key}")."[after][]" }}" class="form-control" rows="2"> {{ $chunck }} </textarea>
 					<br>
+					</div>
 				@else
+					<div class="tab-pane "  id="{{$key.'-'.$k}}">
 					<label for="{{ $chunck }}" class="col-sm-2 control-label">{{ (!$k ? trans('admin.language.singular') : trans('admin.language.plural'))." ($m[1]):" }}</label>
 					<input type="hidden" name="{{ (empty($parents) ? $key : implode('__', $parents)."__{$key}")."[before][]" }}" value="{{ $m[1] }}">
 					<textarea name="{{ (empty($parents) ? $key : implode('__', $parents)."__{$key}")."[after][]" }}" class="form-control" rows="2"> {{ $m[2] }} </textarea>
 					<br>
+					</div>
 				@endif
 			@endforeach
+				</div>
 			</div>
 		@else
 			<textarea name="{{ (empty($parents) ? $key : implode('__', $parents)."__{$key}") }}" class="form-control" rows="2"> {{ $item }} </textarea>
