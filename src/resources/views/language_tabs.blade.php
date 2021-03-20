@@ -10,14 +10,7 @@
         <div class="tab-pane {{($key==$first_key ? 'active' : '')}}"  id="{{$key}}">
             @php
                 if (is_array($item)) {
-                    echo view()->make('langfilemanager::language_headers', [
-                        'header' => $key,
-                        'parents' => $parents,
-                        'level' => $level,
-                        'item' => $item,
-                        'langfile' => $langfile,
-                        'lang_file_name' => $lang_file_name,
-                    ])->render();
+                    echo $langfile->displayInputs($item, $parents, $header, $level);
                 } else {
                     echo view()->make('langfilemanager::language_inputs', [
                         'key' => $key,
