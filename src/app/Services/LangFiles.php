@@ -137,7 +137,7 @@ class LangFiles
         $has_lower_level = false;
         $first_key = array_key_first($fileArray);
         foreach ($fileArray as $key => $item) {
-            if (is_array($item))  {
+            if (is_array($item)) {
                 $has_lower_level = true;
             }
         }
@@ -151,7 +151,7 @@ class LangFiles
                 'lang_file_name' => $this->file,
                 'fileArray'=>$fileArray,
             ])->render();
-        }else{
+        } else {
             foreach ($fileArray as $key => $item) {
                 echo view()->make('langfilemanager::language_inputs', [
                     'key' => $key,
